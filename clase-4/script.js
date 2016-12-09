@@ -93,10 +93,10 @@ console.log(persona1);
 
 // Herencia
 
-function Vehiculo () {
+function Vehiculo (nro_asientos) {
 	this.nro_ruedas;
 	this.color;
-	this.nro_asientos;
+	this.nro_asientos=nro_asientos;
 
 }
 
@@ -104,24 +104,45 @@ Vehiculo.prototype.partir = function(){console.log("BRRRRUMM!!")};
 Vehiculo.prototype.getNroRuedas = function(){ return this.nro_ruedas};
 
 
-function Camioneta (nro_ruedas){
+function Camioneta (nro_ruedas,nro_asientos){
 	this.nro_ruedas = nro_ruedas;
+	Vehiculo.call(this,nro_asientos);
 
 }
 
+
+
 Camioneta.prototype = Object.create(Vehiculo.prototype);
 Camioneta.prototype.constructor = Camioneta;
-Camioneta.prototype.partir = function (){alert("Tracacacacacaca")};
+Camioneta.prototype.partir = function (){console.log("Tracacacacacaca")};
+Camioneta.prototype.getNroAsientos = function(){return this.nro_asientos};
 
 
-var chevrolet = new Camioneta(5);
-
-console.log(chevrolet.getNroRuedas);
+var chevrolet = new Camioneta(5,3);
+console.log("Chevrolet");
+console.log("Numero de Ruedas"+ chevrolet.getNroRuedas());
 console.log(chevrolet.partir());
+console.log(chevrolet.nro_asientos);
 
-var vehiculo = new Vehiculo ();
+var toyota = new Camioneta(5,8);
+console.log("Toyota: "+ toyota.getNroAsientos());
 
 
+var vehiculo = new Vehiculo(8);
+console.log(vehiculo.getNroRuedas());
+console.log(vehiculo.partir());
+console.log(vehiculo.nro_asientos);
+
+
+var moto = new Vehiculo();
+moto.nro_ruedas = 2;
+
+moto.partir = function (){console.log("Pruuuuuuum")};
+
+console.log("Moto \n");
+console.log(moto.getNroRuedas());
+console.log(moto.partir());
+console.log(vehiculo.partir());
 
 
 // Ejercicio
