@@ -29,7 +29,7 @@ function Animal(){
 
 // Segunda forma
 
-var ClassObjeto {
+function ClassObjeto {
 	forma :"";
 	tamaño : "";
 	peso : "";
