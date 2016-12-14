@@ -28,12 +28,6 @@ auto4.peso=500;
 auto4.patente="AAAA";
 
 
-auto1.getPatente();
-auto2.getPatente();
-
-
-
-
 function Camion() {
 	this.pesoMaximo;
 	this.pesoActual;
@@ -42,6 +36,25 @@ function Camion() {
 
 Camion.prototype.getPesoActual = function(){return this.pesoActual}
 Camion.prototype.getPesoMaximo = function(){return this.pesoMaximo};
+Camion.prototype.verificarPatente = function(auto){
+
+	if (this.AutosCargados.length){
+		var autoEnCamion = this.AutosCargados.find(function(subirAuto){
+			/*console.log("Vehiculo "+ auto.getPatente() +" no está en el camion");*/
+			return subirAuto.getPatente() == auto.getPatente()
+			
+		});
+		return autoEnCamion === undefined;
+
+}
+	return true;
+};
+
+Camion.prototype.verificaPeso = function(auto){ 
+	var pesoActual = this.pesoActual + auto.getPeso();
+	return pesoActual < this.pesoMaximo;
+};
+
 Camion.prototype.cargarCamion = function(auto){
 
 	if(this.verificarPatente(auto) && this.verificaPeso(auto)){
@@ -63,32 +76,12 @@ Camion.prototype.cargarCamion = function(auto){
 
 };
 
-Camion.prototype.verificarPatente = function(auto){
-
-	if (this.AutosCargados.length){
-		var autoEnCamion = this.AutosCargados.find(function(subirAuto){
-			return subirAuto.getPatente() == auto.getPatente()
-			console.log("Vehiculo no está en el camion");
-		});
-		return autoEnCamion === undefined;
-
-}
-	return true;
-};
-
-Camion.prototype.verificaPeso = function(auto){ 
-	var pesoActual = this.pesoActual + auto.getPeso();
-	return pesoActual < this.pesoMaximo;
-};
-
 Camion.prototype.listarCarga = function(){return this.AutosCargados};
 
 var camion1 = new Camion();
 camion1.pesoMaximo=1000;
 camion1.pesoActual=0;
 //camion1.AutosCargados=[[100,"AAA"],[140,"BBB"]];
-
-camion1.verificarPatente(auto1);
 
 
 camion1.cargarCamion(auto1);
