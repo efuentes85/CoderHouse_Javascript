@@ -90,11 +90,6 @@ nombre();
 
 
 // Ejercicio 2 
-// Forma A
-
- 
-// Forma B
-
 
 
 var opc = prompt("Tipo de día: ");
