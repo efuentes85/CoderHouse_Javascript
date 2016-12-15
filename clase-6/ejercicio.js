@@ -55,14 +55,14 @@ Profesor.prototype.getAsignatura = function(){return this.asignatura};
 
 function Curso () {
 	this.Alumnos=[];
-	this.profesor = {}; // Este solo recibe un objeto de tipo profesor
+	this.profesor = {}; // Este solo recibe un objeto de tipo profesor, se tiene que crear para poder asignar el objeto
 };
 
 Curso.prototype.setAlumno = function(alumno){return this.Alumnos.push(alumno)};
 Curso.prototype.setProfesor = function(profesor){return this.profesor=profesor};
 Curso.prototype.getProfesor = function(){console.log(this.profesor.getNombreCompleto())};
 Curso.prototype.listarAlumnos = function(){
-				console.log("LISTA DE ALUMNOS\n=======================\nCURSO: "+this.profesor.getAsignatura()+" PROFESOR: "+this.profesor.getNombreCompleto());
+			console.log("LISTA DE ALUMNOS\n=======================\nCURSO: "+this.profesor.getAsignatura()+" PROFESOR: "+this.profesor.getNombreCompleto());
 	          this.Alumnos.forEach(function(alumno, index) {
                 console.log(index+1+". "+ alumno.getNombreCompleto());
             });
@@ -71,7 +71,7 @@ Curso.prototype.listarAlumnos = function(){
 
 
 Curso.prototype.listarAprobados = function(){
-				console.log("LISTA DE ALUMNOS APROBADOS\n=======================\nCURSO: "+this.profesor.getAsignatura()+" PROFESOR: "+this.profesor.getNombreCompleto());
+			console.log("LISTA DE ALUMNOS APROBADOS\n=======================\nCURSO: "+this.profesor.getAsignatura()+" PROFESOR: "+this.profesor.getNombreCompleto());
 	          this.Alumnos.forEach(function(alumno, index) {
 	          if(alumno.getNotaFinal() >= 4){
                 console.log("Alumno: " + alumno.getNombreCompleto() + "   Nota Final: "+alumno.getNotaFinal());
@@ -90,8 +90,44 @@ Curso.prototype.listarReprobados = function(){
 
         };
 
-var alumno1 = new Alumno("Juan Pablo","Perez Iturra",4,12);
-var alumno2 = new Alumno("Martin Ignacio","Gonzales Fuentes",6,12);
+
+
+Curso.prototype.getPromedio = function(){
+		var promedio = 0;
+		var total = 0;
+		this.Alumnos.forEach(function(alumno,index){
+			promedio += alumno.getNotaFinal();
+			total = index+1;
+
+		});
+		console.log("Promedio: "+ promedio / total);
+
+};
+
+
+Curso.prototype.notasCurso = function(opc){
+		if (opc){
+			this.Alumnos.sort();
+
+		}
+
+}
+/*
+Curso.prototype.obtenerAlumnos = function(valor){
+	if(valor){
+		this.autos.filter(function() {
+     	return autoArriba.getPatente() == auto.getPatente()
+			};
+
+	else  {
+	
+		}
+};
+*/
+
+
+var alumno1 = new Alumno("Juan Pablo","Perez Iturra",4.5,12);
+var alumno2 = new Alumno("Martin Ignacio","Gonzales Fuentes",6.4,12);
 var alumno3 = new Alumno("Sofia Martina","Guerrero Ibacache",3,12);
 var alumno4 = new Alumno("Valentina Ximena","Carrasco Latorre",7,11);
 var alumno5 = new Alumno("Patricio Humberto","Fuentes Velasco",4,11);
@@ -118,3 +154,5 @@ cursoMatematicas.setProfesor(profesor);
 cursoMatematicas.listarAlumnos();
 cursoMatematicas.listarAprobados();
 cursoMatematicas.listarReprobados();
+cursoMatematicas.getPromedio();
+cursoMatematicas.notasCurso(true);
