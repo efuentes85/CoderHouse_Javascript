@@ -1,6 +1,4 @@
-
 // Ejercicio
-
 
 function Auto() {
 	this.peso;
@@ -38,13 +36,13 @@ Camion.prototype.getPesoActual = function(){return this.pesoActual}
 Camion.prototype.getPesoMaximo = function(){return this.pesoMaximo};
 Camion.prototype.verificarPatente = function(auto){
 
-	if (this.AutosCargados.length){
+	if (this.AutosCargados.length != 0 ){
 		var autoEnCamion = this.AutosCargados.find(function(subirAuto){
 			/*console.log("Vehiculo "+ auto.getPatente() +" no está en el camion");*/
 			return subirAuto.getPatente() == auto.getPatente()
 			
 		});
-		return autoEnCamion === undefined;
+		return autoEnCamion === undefined; // el metodo find devuelve "undefined" si no encuentra algo en  el array, es por eso que esto es TRUE.
 
 }
 	return true;
@@ -67,16 +65,18 @@ Camion.prototype.cargarCamion = function(auto){
 			console.log("El peso del auto: "+ auto.getPeso() +" supera el límite actual del camion: "+ this.getPesoActual());
 		}
 		else {
-			
 			console.log("El vehiculo con la patente: " +auto.getPatente()+ " ya está en el camión");
-
 		}
 		return false
 	}
 
 };
 
-Camion.prototype.listarCarga = function(){return this.AutosCargados};
+Camion.prototype.getPatentes = function() {
+            this.AutosCargados.forEach(function(auto, index) {
+                console.log("Patente auto " + index + ": " + auto.getPatente());
+            })
+        };
 
 var camion1 = new Camion();
 camion1.pesoMaximo=1000;
@@ -112,4 +112,4 @@ camion1.cargarCamion(auto6);
 camion1.cargarCamion(auto7);
 
 camion1.getPesoActual();
-camion1.listarCarga();
+camion1.getPatentes();
