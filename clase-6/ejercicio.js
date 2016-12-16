@@ -90,6 +90,25 @@ Curso.prototype.listarReprobados = function(){
 
         };
 
+Curso.prototype.getNotaMaxima = function(nota){
+	var soloNotas =[];	
+	this.Alumnos.forEach(function(alumno,index){
+		soloNotas.push(alumno.getNotaFinal());			
+		})
+
+		soloNotas.sort(function(a,b){return a-b}); // Ordeno el array de las notas de menor a mayor
+		var total=soloNotas.length;
+
+		if(nota){
+			return soloNotas[total-1];
+		}
+		else{
+			return soloNotas[0];
+
+		}
+
+		
+};
 
 
 Curso.prototype.getPromedio = function(){
@@ -105,25 +124,24 @@ Curso.prototype.getPromedio = function(){
 };
 
 
-Curso.prototype.notasCurso = function(opc){
-		if (opc){
-			this.Alumnos.sort();
+Curso.prototype.getRepitentesAprobados = function(repitente) {
+    var arrAlumnos = this.Alumnos.filter(function(alumno) {
+        if (repitente) {
+            return alumno.getNotaFinal() < 4;
+        } else {
+            return alumno.getNotaFinal() >= 4;
+        }
+    });
 
-		}
+    var response = [];
+    arrAlumnos.forEach(function(alumno, index) {
+        response.push(alumno.getNombreCompleto());
+    });
 
-}
-/*
-Curso.prototype.obtenerAlumnos = function(valor){
-	if(valor){
-		this.autos.filter(function() {
-     	return autoArriba.getPatente() == auto.getPatente()
-			};
-
-	else  {
-	
-		}
+    return response;
 };
-*/
+
+
 
 
 var alumno1 = new Alumno("Juan Pablo","Perez Iturra",4.5,12);
@@ -155,4 +173,6 @@ cursoMatematicas.listarAlumnos();
 cursoMatematicas.listarAprobados();
 cursoMatematicas.listarReprobados();
 cursoMatematicas.getPromedio();
-cursoMatematicas.notasCurso(true);
+console.log("Reprobados: "+cursoMatematicas.getRepitentesAprobados(true));
+console.log("Nota más alta del curso: "+cursoMatematicas.getNotaMaxima(true));
+console.log("Nota más baja del curso: "+cursoMatematicas.getNotaMaxima(false));
