@@ -48,7 +48,7 @@ var arreglo = ["uno","dos","tres","cuatro"];
 arreglo.slice(1); // no muestra el elemento en la posicion 1 y me trae lo demas
 arreglo.slice(2,3);
 
-var arreglo = ["uno","dos","tres","cuatro"];
+var arreglo = ["uno","dos","tres","cuatro"]; // Sirve para recorrer el arreglo
 arreglo.forEach(function(elemento,index){console.log(elemento); console.log(index);});
 
 var arreglo = ["uno","dos","tres","cuatro"];
