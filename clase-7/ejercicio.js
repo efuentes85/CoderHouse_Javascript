@@ -40,6 +40,14 @@
 				}
 			}
 			
+
+		/*	Otra opcion para poder hacerlo!!!
+			Noticias.forEach(function(noticia,index){
+				if (Noticias.id == noticia.id){
+					Noticias.splice(index,1);
+					return;
+				}
+			})*/
 			/*var tmp=[];  // Esta otra forma solo crea un arreglo sin la noticia
 			Noticias.forEach(function (news){
 				if (news.id != id) {
@@ -55,22 +63,23 @@
 
 
 		Diario.ordenarNoticias = function(){
-			Noticias.sort(function(a,b) {return a["id"] -b["id"] });
+			Noticias.sort(function(a,b) {return a["id"] - b["id"] });
 		}
 
 
 		Diario.listarNoticias = function(){return Noticias;}
 
 		Diario.saveNoticias = function(){
-			var strTmp = [];
+			//var strTmp =[];
 
-			for (index in Noticias){ //id,titulo,desc,URL
-			//	strTmp.push('"id: "'+ Noticias[index].id + '", "titulo": "'+ Noticias[index].titulo + '" , "desc: " "',+Noticias[index].desc+'", "URL: " "'+Noticias[index].URL+ '"}');
-				//strTmp.push()
-			}
-			localStorage.Noticias = "[" +strTmp.toString() + "]";
+			//		strTmp = JSON.stringify(Noticias);
+					localStorage.Noticias = JSON.stringify(Noticias);
+			
+			};
 
-		};
+			
+			
+	
 
 		Diario.loadNoticias = function(){
 			Noticias = JSON.parse(localStorage.getItem("Noticias"));
