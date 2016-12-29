@@ -10,32 +10,50 @@ Ordenar por titulo asc o desc y por ID
 Persistir las tareas en localStorage
 */
 (function(exports){
-		var lista = {};
+
+  
+		var toDoList = {};
 		var tareas = [];
 
-		lista.agregarTarea = function(id,titulo,desc,estado){
+		toDoList.agregarTarea = function(titulo,desc){
 			var tarea={};
-			tarea.id = id;
+			tarea.id = calcIdTarea();
 			tarea.titulo = titulo;
 			tarea.descripcion = desc;
-			tarea.estado = estado;
-			tareas.push(tarea);
+			tarea.estado = false;
+			
+      tareas.push(tarea);
+      toDoList.saveTareas();
 		};
 
 
-		lista.editarTarea = function(id,titulo,desc) {
+    var calcIdTarea = function(){
+         return tareas.length +1;
+   /*   if (tareas.length == 0){
+        return 1;
+      }
+      else {
+        toDoList.sortTareas("id","asc");
+        return parseInt(tareas[tareas.length -1].id)+1;
+      }*/
+
+    };
+
+		toDoList.editarTarea = function(id,titulo,desc) {
         tareas.forEach(function(task, indice) {
            if (task.id == id) {
-               tareas[indice].titulo=titulo;
-               tareas[indice].descripcion=desc;
-               console.log("Tarea actualizada");
+               
+                tareas[indice].titulo=titulo;
+                tareas[indice].descripcion=desc;
+              
+                console.log("Tarea actualizada");
                return;
            		}
         	});
    	 	};
 
 
-   	 	lista.editarEstado = function(id,estado){
+   	 	toDoList.editarEstado = function(id,estado){
    	 		tareas.forEach(function(task, indice) {
            		if (task.id == id) {
               	 	tareas[indice].estado=estado;
@@ -46,15 +64,17 @@ Persistir las tareas en localStorage
    	 	};
 
    	 	
-   	 	lista.eliminarTarea = function(id,opc){
+   	 	toDoList.eliminarTarea = function(id,opc){
    	 		if (opc == true){
    	 			tareas.splice(0,tareas.length);
+          toDoList.saveTareas(); 
 
    	 		}
    	 		else {
    	 			 tareas.forEach(function(task, indice) {
            			if (task.id == id) {
-           				tareas.splice(indice,1);               
+           				tareas.splice(indice,1);  
+                  toDoList.saveTareas();             
            			}
         		});
    	 		}
@@ -62,7 +82,7 @@ Persistir las tareas en localStorage
 
 
 
-   	 	lista.sortTareas = function(parametro,orden) {
+   	 	toDoList.sortTareas = function(parametro,orden) {
         switch(parametro) {
             case "id":
             	if (orden=="asc"){
@@ -102,26 +122,41 @@ Persistir las tareas en localStorage
     	};
 
 
-		lista.mostrarTareas = function(){
+		toDoList.mostrarTareas = function(){
 			return tareas;
 		};
 
 
-		lista.getTareas = function() {
+    toDoList.buscarTarea = function(id){
+        aux={};
+        tareas.forEach(function(tarea,indice){
+            if (tarea.id == id){
+                aux.id == tarea[indice].id;
+                aux.titulo == tarea[indice].titulo;
+                aux.descripcion == tarea[indice].descripcion;
+                aux.estado == tarea[indice].estado;
+                return aux;
+            }
+
+        });
+
+    }
+
+		toDoList.getTareas = function() {
         	return tareas;
     	};
 
-   		lista.setTareas = function(arrTarea) {
+   		toDoList.setTareas = function(arrTarea) {
         tareas = arrTarea;
    		 }
 
 
-		lista.saveTareas = function() {
+		toDoList.saveTareas = function() {
         localStorage.tareas = JSON.stringify(tareas);
    		
    		 };
 
-    	lista.getTareasDB = function() {
+    	toDoList.getTareasDB = function() {
         var localTarea = localStorage.getItem("tareas");
 
         if (localTarea !== undefined) {
@@ -134,16 +169,16 @@ Persistir las tareas en localStorage
     
 
 
-	exports.ToDoList = lista;
+	exports.ToDoList = toDoList;
 
 })(window);
 
 /*
-ToDoList.agregarTarea(1,"Hola","Prueba de la primera tarea",0)
-ToDoList.agregarTarea(2,"Prueba","Workshop",0)
-ToDoList.agregarTarea(3,"Test","Test de la aplicacion",1)
-ToDoList.agregarTarea(4,"Words","More Words",1)
-ToDoList.agregarTarea(5,"Algo que hacer","Implementar el modulo para integrar",0)
+ToDoList.agregarTarea("Hola","Prueba de la primera tarea")
+ToDoList.agregarTarea("Prueba","Workshop")
+ToDoList.agregarTarea("Test","Test de la aplicacion")
+ToDoList.agregarTarea("Words","More Words")
+ToDoList.agregarTarea("Algo que hacer","Implementar el modulo para integrar")
 
 ToDoList.mostrarTareas()
 

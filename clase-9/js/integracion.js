@@ -20,20 +20,21 @@ function mostrarToDoList() {
         var textoDescripcion = document.createTextNode(tarea.descripcion);
 
         descripcionTarea.appendChild(textoDescripcion);
-        elementoTarea.appendChild(descripcionTarea);
+        elementoTarea.appendChild(descripcionTarea); 
+    
 
-        // Estado Tarea
+        var estadoTarea = document.createElement("input");
+        var atributoTarea = document.appendChild("type","checkbox");
 
-        var estadoTarea = document.createElement("INPUT");
-        estadoTarea.setAttribute("type", "checkbox");
-        estadoTarea.setAttribute("checked", "false");
-
-        if (tarea.estado == 1){          
-            estadoTarea.setAttribute("checked", "true");
-        }
-              
-  
+        estadoTarea.appendChild(atributoTarea);
         elementoTarea.appendChild(estadoTarea);
+        /*
+        checkbox.setAttribute("type","checkbox");
+        checkbox.setAttribute("class","estado");
+        checkbox.appendChild(checkbox);
+*/
+        
+
 
         document.body.appendChild(elementoTarea);
     });

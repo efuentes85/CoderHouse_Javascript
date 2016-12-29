@@ -14,7 +14,7 @@
 			
 			<div class="formulario" data-js="formLista">
 
-				<form method="POST">
+				<form method="GET">
 					<fieldset>
 						<legend>Creacion de tarea</legend>
 					<div>
@@ -23,14 +23,9 @@
 					</div>
 					<div>
 						<label for="descripcion">Descripcion</label>
-						<input type="text" name="desc" id="desc"/>
+						<textarea rows="5" cols="50" name="desc" id="desc"></textarea>
 					</div>
-					<div>
-						<label for="estado">Estado de la Tarea</label>
-						<input type="radio" class="estado" value="0">Pendiente 
-						<input type="radio" class="estado" value="1">Completado<br>
-					</div>
-			
+
 					<div>
 						<input type="submit" value="Crear Tarea" data-id="crearTareaForm"/>
 
@@ -38,7 +33,7 @@
 
 					</fieldset>
 					
-					<div id="listaTareas"></div>
+				
 
 				</form>	
 			</div>
