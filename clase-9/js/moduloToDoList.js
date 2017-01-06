@@ -26,6 +26,17 @@ Persistir las tareas en localStorage
       toDoList.saveTareas();
 		};
 
+	toDoList.agregarTarea = function(titulo,desc,estado){
+			var tarea={};
+			tarea.id = calcIdTarea();
+			tarea.titulo = titulo;
+			tarea.descripcion = desc;
+			tarea.estado = true;
+			
+      tareas.push(tarea);
+      toDoList.saveTareas();
+		};
+
 
     var calcIdTarea = function(){
          return tareas.length +1;
@@ -165,6 +176,18 @@ Persistir las tareas en localStorage
             tareas = [];
         }
     	};
+
+
+    	toDoList.setEstado = function(id){
+    	tareas.forEach(function(task, indice) {
+           if (task.id == id) {
+                tareas[indice].estado=true;
+                console.log("Tarea actualizada");
+               return;
+           		}
+        	});
+   	 	};
+
 
     
 
