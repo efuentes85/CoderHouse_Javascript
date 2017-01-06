@@ -24,9 +24,24 @@ function mostrarToDoList() {
     
 
         var estadoTarea = document.createElement("input");
-        var atributoTarea = document.appendChild("type","checkbox");
+        estadoTarea.setAttribute("type","checkbox");
+        estadoTarea.setAttribute("class","checkbox_estado");
+        estadoTarea.setAttribute("checked", function(){
+                                               if(tarea.estado){
+                                                    return false
+
+                                                    } else {return true}
+        });
+
+         
+
+
+       /* var atributoTarea = document.appendChild("type","checkbox");
 
         estadoTarea.appendChild(atributoTarea);
+        var atributoTarea = document.appendChild("class","checkbox");
+*/
+
         elementoTarea.appendChild(estadoTarea);
         /*
         checkbox.setAttribute("type","checkbox");
